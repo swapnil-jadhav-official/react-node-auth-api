@@ -24,7 +24,7 @@ const auth = async (req,res) =>{
                                    return res.render('auth', { token, username: user.username, email : user.email });                       
                     })
                     .catch(error =>{
-                        return res.status(400).send({ error: "Password does not Match"})
+                        return res.render('error',{error:"incorrect password"});
                     })
             })
             .catch( error => {
@@ -32,7 +32,7 @@ const auth = async (req,res) =>{
             })
 
     } catch (error) {
-        return res.status(500).send({ error});
+         return res.render('error',{error:"incorrect password"});
     }
 
     
@@ -51,10 +51,10 @@ const register = async (req, res) => {
       .then((results) => {
         const [existingUsername, existingEmail] = results;
         if (existingUsername) {
-          throw new Error("Please use a unique username");
+           return res.render('error',{error:""Please use a unique username""});
         }
         if (existingEmail) {
-          throw new Error("Please use a unique email");
+           return res.render('error',{error:""Please use a unique email""});
         }
         return bcrypt.hash(password, 10);
       })
@@ -74,7 +74,7 @@ const register = async (req, res) => {
         return res.render('error',{error});
       });
   } catch (error) {
-    return res.status(500).send(error);
+     return res.render('error',{error});
   }
 };
 
