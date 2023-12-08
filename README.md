@@ -1,6 +1,6 @@
 --- 
  
-# React Node Auth API 
+# React Node Auth API
 This is the server-side code for the React Node Auth API. It uses EJS for rendering.
 The application is hosted at: https://react-node-auth-api.onrender.com/
  
