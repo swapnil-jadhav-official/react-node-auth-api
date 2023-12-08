@@ -20,7 +20,7 @@ const auth = async (req,res) =>{
                         const token = jwt.sign({
                                         userId: user._id,
                                         username : user.username
-                                    }, process.env.JWT_SECRET, { expiresIn : "24h"});
+                                    }, "secrete", { expiresIn : "24h"});
 
                                     res.render('auth', { token });
                         return res.status(200).send({
