@@ -46,7 +46,7 @@ const auth = async (req,res) =>{
     
 };
 
-const register = (req,res) => {
+const register = async (req,res) => {
 
     try {
         const { username, password, profile, email } = req.body;        
