@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ejs = require('ejs');
 var bodyParser = require('body-parser');
-const auth  = require('./controllers/auth-controller');
+const {auth, register}  = require('./controllers/auth-controller');
 const Connection = require('./db/db');
 
 app.use(bodyParser.urlencoded({extended : true}));
@@ -14,12 +14,12 @@ Connection();
 app.get('/', (req, res) => {
     res.render('login');
   });
-  app.get('/new-user', (req, res) => {
+
+app.get('/new-user', (req, res) => {
     res.render('register');
   });
-app.post('/register',(req, res)=>{
-    return res.send("Registration Successfully!");
-})
+  
+app.post('/register',register)
 
 app.post('/api/auth', auth);
 
