@@ -79,7 +79,7 @@ const register = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
-    const { username, newPassword } = req.body;
+    const { username, password } = req.body;
 
     // check if the user with the provided email exists
     const existingUser = await UserModel.findOne({ username });
@@ -89,7 +89,7 @@ const resetPassword = async (req, res) => {
     }
 
     // hash the new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // update the user's password
     existingUser.password = hashedPassword;
