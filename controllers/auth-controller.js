@@ -46,67 +46,45 @@ const auth = async (req,res) =>{
     
 };
 
-const register = async (req,res) => {
+const register = async (req, res) => {
+  try {
+    const { username, password, profile, email } = req.body;
 
-    try {
-        const { username, password, profile, email } = req.body;        
+    // check the existing user
+    const existUsername = UserModel.findOne({ username });
+    // check for existing email
+    const existEmail = UserModel.findOne({ email });
 
-        // check the existing user
-        const existUsername = new Promise((resolve, reject) => {
-            UserModel.findOne({ username }, function(err, user){
-                if(err) reject(new Error(err))
-                if(user) reject({ error : "Please use unique username"});
-
-                resolve();
-            })
+    Promise.all([existUsername, existEmail])
+      .then((results) => {
+        const [existingUsername, existingEmail] = results;
+        if (existingUsername) {
+          throw new Error("Please use a unique username");
+        }
+        if (existingEmail) {
+          throw new Error("Please use a unique email");
+        }
+        return bcrypt.hash(password, 10);
+      })
+      .then((hashedPassword) => {
+        const user = new UserModel({
+          username,
+          password: hashedPassword,
+          profile: profile || "",
+          email,
         });
-
-        // check for existing email
-        const existEmail = new Promise((resolve, reject) => {
-            UserModel.findOne({ email }, function(err, email){
-                if(err) reject(new Error(err))
-                if(email) reject({ error : "Please use unique Email"});
-
-                resolve();
-            })
-        });
-
-
-        Promise.all([existUsername, existEmail])
-            .then(() => {
-                if(password){
-                    bcrypt.hash(password, 10)
-                        .then( hashedPassword => {
-                            
-                            const user = new UserModel({
-                                username,
-                                password: hashedPassword,
-                                profile: profile || '',
-                                email
-                            });
-
-                            // return save result as a response
-                            user.save()
-                                .then(result => res.status(201).send({ msg: "User Register Successfully"}))
-                                .catch(error => res.status(500).send({error}))
-
-                        }).catch(error => {
-                            console.log(error)
-                            return res.status(500).send({
-                                error : "Enable to hashed password"
-                            })
-                        })
-                }
-            }).catch(error => {
-                console.log(error)
-                return res.status(500).send({ error })
-            })
-
-
-    } catch (error) {
-        return res.status(500).send(error);
-    }
-   
+        return user.save();
+      })
+      .then(() => {
+        res.status(201).send({ msg: "User Registered Successfully" });
+      })
+      .catch((error) => {
+        console.log(error);
+        return res.status(500).send({ error: error.message });
+      });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 // const auth = async (req, res) => {
 //   req.header('Content-Type', 'application/json');
