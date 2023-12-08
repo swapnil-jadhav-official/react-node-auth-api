@@ -4,7 +4,7 @@
  
 This is the server-side code for the React Node Auth API. It uses EJS for rendering. 
  
-The application is hosted at: [https://react-node-auth-api.onrender.com/](https://react-node-auth-api.onrender.com/) 
+The application is hosted at: https://react-node-auth-api.onrender.com/ 
  
 ## User Guide 
  
