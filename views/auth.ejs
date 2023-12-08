@@ -29,7 +29,7 @@
       margin-bottom: 10px;
     }
 
-    .token {
+    .info {
       background-color: #f9f9f9;
       padding: 10px;
       border: 1px solid #ccc;
@@ -41,8 +41,11 @@
 <body>
   <div class="container">
     <h1>Authentication Successful!</h1>
-    <p>Your JWT token:</p>
-    <p class="token"><%= token %></p>
+    <p>User Information:</p>
+    <div class="info">
+      <p><strong>Username:</strong> <%= username %></p>
+      <p><strong>Email:</strong> <%= email %></p>
+    </div>
   </div>
 </body>
 </html>
