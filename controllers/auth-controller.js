@@ -32,8 +32,7 @@ const auth = async (req,res) =>{
                     })
             })
             .catch( error => {
-                console.log(error)
-                return res.status(404).send({ error : "Username not Found"});
+                alert("Username not Found");
             })
 
     } catch (error) {
