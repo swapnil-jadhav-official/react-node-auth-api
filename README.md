@@ -1,5 +1,5 @@
 # react-node-auth-api
-this is serverside code & useing ejs for rendering
+this is serverside code & using ejs for rendering
 
 # User Guide : 
 
