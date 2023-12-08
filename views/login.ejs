@@ -1,51 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #f5f5f5;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 20px;
-      margin-top: 20px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
     .container {
-      width: 400px;
-      margin: 0 auto;
+      max-width: 400px;
       padding: 20px;
+      background-color: #fff;
       border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
     }
 
     input {
-      width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
+      border-radius: 3px;
     }
 
-    input[type="submit"] {
-      background-color: #4CAF50;
+    button {
+      background-color: #4caf50;
       color: white;
-      border: none;
       padding: 10px;
+      border: none;
+      border-radius: 3px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-  <h1>Login</h1>
   <div class="container">
+    <h1>Login</h1>
+    <p>Please enter your credentials to log in.</p>
+    
+    <% if (message) { %>
+      <p class="message"><%= message %></p>
+    <% } %>
+
     <form action="/api/auth" method="post">
-      <input type="text" name="username" placeholder="Username">
-      <input type="password" name="password" placeholder="Password">
-      <input type="submit" value="Login">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Log In</button>
     </form>
-    <span>Not user?</span><a href="/new-user">Register</a>
+  <span>Not user?</span><a href="/new-user">Register</a>
   </div>
 </body>
 </html>
