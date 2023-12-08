@@ -75,10 +75,6 @@
   <div class="container">
     <h1>Login</h1>
     <p>Please enter your credentials to log in.</p>
-    
-    <% if (message) { %>
-      <p class="message"><%= message %></p>
-    <% } %>
 
     <form action="/api/auth" method="post">
       <label for="username">Username:</label>
