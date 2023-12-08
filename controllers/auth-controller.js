@@ -77,5 +77,30 @@ const register = async (req, res) => {
   }
 };
 
+const resetPassword = async (req, res) => {
+  try {
+    const { username, newPassword } = req.body;
 
-module.exports = { auth , register};
+    // check if the user with the provided email exists
+    const existingUser = await UserModel.findOne({ username });
+
+    if (!existingUser) {
+      return res.render('error', { error: "User not found for the given email" });
+    }
+
+    // hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // update the user's password
+    existingUser.password = hashedPassword;
+    await existingUser.save();
+
+    return res.render('success', { message: "Password reset successfully" });
+  } catch (error) {
+    return res.render('error', { error });
+  }
+};
+
+
+
+module.exports = { auth , register, resetPassword};
