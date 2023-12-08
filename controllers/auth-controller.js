@@ -14,8 +14,7 @@ const auth = async (req,res) =>{
                 
                 bcrypt.compare(password, user.password)
                     .then(passwordCheck => {
-                        if(!passwordCheck) return res.status(400).send({ error: "Don't have Password"});
-
+                        if(!passwordCheck) return res.render('error',{error:"Don't have password"});
                         // create jwt token
                         const token = jwt.sign({
                                         userId: user._id,
@@ -68,7 +67,7 @@ const register = async (req, res) => {
         return user.save();
       })
       .then(() => {
-          return res.render('login');
+          return res.render('success');
       })
       .catch((error) => {
         return res.render('error',{error});
