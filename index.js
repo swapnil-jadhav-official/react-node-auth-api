@@ -14,7 +14,14 @@ Connection();
 app.get('/', (req, res) => {
     res.render('login');
   });
-
+app.get('/reset', (req, res) => {
+    const username = req.query.username || '';
+    res.render('reset', { username });
+  });
+app.get('/reset-password', (req, res) => {
+    const username = req.query.username || '';
+    res.render('success');
+  });
 app.get('/new-user', (req, res) => {
     res.render('register');
   });
