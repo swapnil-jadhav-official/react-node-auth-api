@@ -32,7 +32,7 @@ const auth = async (req,res) =>{
                     })
             })
             .catch( error => {
-                alert("Username not Found");
+                return res.render('error',{error: "User not found"});
             })
 
     } catch (error) {
