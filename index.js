@@ -1,24 +1,21 @@
 const express = require('express');
 const app = express();
-const jwt = require('jsonwebtoken');
-const db = require("./db.json");
+
 const PORT = process.env.PORT || 3000;
-app.use(express.json());
+const ejs = require('ejs');
+var bodyParser = require('body-parser');
+const auth  = require('./controllers/auth-controller');
 
-app.post('/api/auth', (req, res) => {
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 
-  const username = req.body.username;
-  const password = req.body.password;
+app.get('/', (req, res) => {
+    res.render('login');
+  });
 
-  const user = db.users.find(user => user.username === username && user.password === password);
+app.post('/api/auth', auth);
 
-  if (user) {
-    const token = jwt.sign({ username }, 'secret', { expiresIn: '1h' });
-    res.json({ token });
-  } else {
-    res.status(401).json({ error: 'Invalid username or password' });
-  }
-});
 
 app.listen(PORT, () => console.log('Server started on port 3000'));
 
