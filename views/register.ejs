@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>User Registration</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #f5f5f5;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 20px;
-      margin-top: 20px;
-    }
-
     .container {
-      width: 400px;
+      max-width: 400px;
       margin: 0 auto;
       padding: 20px;
+      background-color: #fff;
       border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     input {
@@ -26,6 +29,7 @@
       padding: 10px;
       margin-bottom: 10px;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
     input[type="submit"] {
@@ -38,14 +42,15 @@
   </style>
 </head>
 <body>
-  <h1>Login</h1>
   <div class="container">
-    <form action="/api/auth" method="post">
+    <h1>User Registration</h1>
+    <form action="/register" method="post">
+      <input type="email" name="email" placeholder="Email">
       <input type="text" name="username" placeholder="Username">
       <input type="password" name="password" placeholder="Password">
-      <input type="submit" value="Login">
+      <input type="password" name="confirmPassword" placeholder="Confirm Password">
+      <input type="submit" value="Register">
     </form>
-    <span>Not user?</span><a href="/new-user">Register</a>
   </div>
 </body>
 </html>
