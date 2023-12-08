@@ -51,10 +51,10 @@ const register = async (req, res) => {
       .then((results) => {
         const [existingUsername, existingEmail] = results;
         if (existingUsername) {
-           return res.render('error',{error:""Please use a unique username""});
+           return res.render('error',{error:"Please use a unique username"});
         }
         if (existingEmail) {
-           return res.render('error',{error:""Please use a unique email""});
+           return res.render('error',{error:"Please use a unique email"});
         }
         return bcrypt.hash(password, 10);
       })
