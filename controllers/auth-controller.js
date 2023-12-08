@@ -77,11 +77,11 @@ const register = async (req, res) => {
         return user.save();
       })
       .then(() => {
-        res.status(201).send({ msg: "User Registered Successfully" });
+          alert("User Register Successfully!");
+          return res.render('login');
       })
       .catch((error) => {
-        console.log(error);
-        return res.status(500).send({ error: error.message });
+        return res.render('error',{error});
       });
   } catch (error) {
     return res.status(500).send(error);
