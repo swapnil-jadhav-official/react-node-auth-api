@@ -18,11 +18,9 @@ app.get('/reset', (req, res) => {
     const username = req.query.username || '';
     res.render('reset', { username });
   });
-app.get('/reset-password', (req, res) => {
-    const username = req.query.username || '';
-    res.render('success');
-  });
-app.get('/new-user', (req, res) => {
+app.get('/reset-password', resetPassword);
+
+app.post('/new-user', (req, res) => {
     res.render('register');
   });
   
