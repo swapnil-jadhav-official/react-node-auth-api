@@ -1,4 +1,4 @@
---- 
+
  
 # React Node Auth API 
  
@@ -14,5 +14,5 @@ Hardcoded data is used at the backend for testing purposes. You can use the foll
 2. Username: user1, Password: pass1 
 3. Username: user2, Password: pass2 
  
---- 
+
   
