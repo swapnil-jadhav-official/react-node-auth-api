@@ -67,7 +67,7 @@ const register = async (req, res) => {
         return user.save();
       })
       .then(() => {
-          return res.render('success');
+          return res.render('success',{ message: "User created successfully" });
       })
       .catch((error) => {
         return res.render('error',{error});
