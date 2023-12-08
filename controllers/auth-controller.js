@@ -73,7 +73,6 @@ const register = async (req, res) => {
         return user.save();
       })
       .then(() => {
-          alert("User Register Successfully!");
           return res.render('login');
       })
       .catch((error) => {
