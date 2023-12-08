@@ -22,12 +22,8 @@ const auth = async (req,res) =>{
                                         username : user.username
                                     }, "secrete", { expiresIn : "24h"});
 
-                                    res.render('auth', { token });
-                        return res.status(200).send({
-                            msg: "Login Successful...!",
-                            username: user.username,
-                            token
-                        });                                    
+                                   return res.render('auth', { token });
+                                                         
 
                     })
                     .catch(error =>{
